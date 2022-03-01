@@ -1,0 +1,21 @@
+
+<header>
+    <div class="container">
+        <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+
+                {% if request.user.is_authenticated != True %}
+                    <li class="nav-item"><a href="{% url 'phone_book_accounts:login' %}" class="nav-link">ورود</a></li>
+                    <li class="nav-item"><a href="{% url 'phone_book_accounts:register' %}" class="nav-link">ثبت نام</a></li>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'phone_book_contacts:show_contact' %}" class="nav-link active" aria-current="page">خانه</a></li>
+                    <li class="nav-item"><a href="{% url 'phone_book_contacts:creat_new_contact' %}" class="nav-link">افزودن مخاطب</a></li>
+                    <li class="nav-item"><a href="{% url 'phone_book_contacts:add_contacts_by_file' %}" class="nav-link">افزودن مخاطبین با اکسل</a></li>
+                    <li class="nav-item"><a href="{% url 'phone_book_contacts:search_contact' %}" class="nav-link">جست و جو پیشرفته</a></li>
+                    <li class="nav-item"><a href="{% url 'phone_book_accounts:logout' %}" class="nav-link">خروج</a></li>
+                {% endif %}
+            </ul>
+        </header>
+    </div>
+</header>

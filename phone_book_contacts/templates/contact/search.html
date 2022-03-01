@@ -1,0 +1,255 @@
+{% extends '_shared/_MainLayout.html' %}
+
+{% block content %}
+    <section class="content">
+
+        <div class="row" >
+            <!-- /.col -->
+            <div class="col-">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true"> جست وجو</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- /.tab-pane -->
+                        <!-- /.tab-pane -->
+
+                        <div class="tab-pane active" id="settings">
+                            <form class="form-horizontal" action="{% url 'phone_book_contacts:search_contact' %}">
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label">نام</label>
+
+                                    <div class="col-sm-5">
+                                        <input type="text" name="name__icontains" value="{{ request.GET.name__icontains }}" class="form-control" id="inputName" placeholder="نام">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label">نام خانوادگی</label>
+
+                                    <div class="col-sm-5">
+                                        <input type="text" value="{{ request.GET.family__icontains }}" name="family__icontains" class="form-control" id="inputName"
+                                               placeholder="نام خانوادگی">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputSkills" class="col-sm-2 control-label">شماره تلفن</label>
+
+                                    <div class="col-sm-5">
+                                        <input type="text" value="{{ request.GET.phone__icontains }}" name="phone__icontains" class="form-control" id="inputSkills"
+                                               placeholder="شماره تلفن">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-sm-2 control-label">ایمیل</label>
+
+                                    <div class="col-sm-5">
+                                        <input type="email" value="{{ request.GET.email__icontains }}" name="email__icontains" class="form-control" id="inputEmail" placeholder="ایمیل">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputExperience" class="col-sm-2 control-label">ادرس</label>
+
+                                    <div class="col-sm-5">
+                                        <textarea class="form-control"  name="address__icontains"  id="inputExperience"
+                                                  placeholder="ادرس">{{ request.GET.address__icontains }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-success  ">جست و جو</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <!-- /.col -->
+            <div class="col-">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">اینباکس</h3>
+
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    {#form part#}
+                    <form action="{% url 'phone_book_contacts:delete_list_contact' %}" id="outer" method="post">
+                        {% csrf_token %}
+                        <div class="box-body no-padding">
+                            <div class="mailbox-controls">
+                                <!-- Check all button -->
+
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i
+                                            class="fa fa-square-o"></i>
+                                    </button>
+
+
+                                    <div class="btn-group">
+                                        <button type="submit" form="outer" class="btn btn-default btn-sm"><i
+                                                class="fa fa-trash-o"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /.btn-group -->
+                                <a href="{% url 'contact:creat_new_contact' %}"
+                                   class="btn btn-default btn-sm">افزودن</a>
+                                <div class="pull-left">
+                                    <div class="btn-group">
+                                        {% if page_obj.has_previous %}
+                                            <a type="button" href="?page={{ page_obj.previous_page_number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                                               class="btn btn-default btn-sm"><i
+                                                    class="fa fa-chevron-right"></i>
+                                            </a>
+
+                                        {% endif %}
+                                        <div class="btn-group me-2" role="group" aria-label="First group">
+                                            {% for num_page in page_obj.paginator %}
+                                                <a type="button" href="?page={{ num_page.number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                                                   class="btn btn-outline-secondary {% if num_page.number == page_obj.number %}active{% endif %}">{{ num_page.number }}</a>
+                                            {% endfor %}
+
+
+                                        </div>
+                                        {% if page_obj.has_next %}
+                                            <a type="button" href="?page={{ page_obj.next_page_number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                                               class="btn btn-default btn-sm"><i
+                                                    class="fa fa-chevron-left"></i>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                    <!-- /.btn-group -->
+                                </div>
+                                <!-- /.pull-right -->
+                            </div>
+                            <div class="table-responsive mailbox-messages">
+                                <table class="table table-hover table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <th class="mailbox-name"> نام و نام خانوادگی</th>
+                                        <th class="mailbox-subject">نام خانوادگی</th>
+                                        <th class="mailbox-subject">شماره</th>
+
+                                        <th class="mailbox-date">حذف</th>
+                                        <th class="mailbox-date">جزییات</th>
+                                    </tr>
+                                    {% for contact in  object_list %}
+
+                                        <tr>
+                                            <td><input type="checkbox" name="id" form="outer" value="{{ contact.id }}">
+                                            </td>
+                                            <td class="mailbox-name">{{ contact.name }}</td>
+                                            <td class="mailbox-name">{{ contact.family }}</td>
+                                            <td class="mailbox-name">{{ contact.phone }}</td>
+                                            <td class="mailbox-attachment">
+                                                <form action="{% url 'phone_book_contacts:delete_contact' %}"
+                                                      id="inner{{ contact.id }}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="text" hidden name="id" form="inner{{ contact.id }}"
+                                                           value="{{ contact.id }}">
+                                                    <button type="submit" class="btn btn-danger"
+                                                            form="inner{{ contact.id }}">حذف
+                                                    </button>
+                                                </form>
+                                                {% if forloop.counter == 1 %}
+                                                    <form action="{% url 'phone_book_contacts:delete_contact' %}"
+                                                          id="inner{{ contact.id }}" method="post">
+                                                        {% csrf_token %}
+                                                    <input type="text"  name="page" form="inner{{ contact.id }}" hidden value="{{ page_obj.number }}" >
+                                                    <input type="text"  name="page" form="outer" hidden value="{{ page_obj.number }}" >
+                                                    </form>
+                                                {% endif %}
+
+                                            </td>
+                                            <td class="mailbox-date">
+                                                <a type="button" href="{% url 'phone_book_contacts:show_detail_contact' contact.id %}" class="btn btn-info">جزییات</a>
+                                            </td>
+                                        </tr>
+
+                                    {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+
+                                <!-- /.table -->
+                            </div>
+                            <!-- /.mail-box-messages -->
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer no-padding">
+                            <div class="mailbox-controls">
+                                <!-- Check all button -->
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i
+                                            class="fa fa-square-o"></i>
+                                    </button>
+                                    <div class="btn-group">
+                                        <button type="submit" form="outer" class="btn btn-default btn-sm"><i
+                                                class="fa fa-trash-o"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                                <!-- /.btn-group -->
+                                <a href="{% url 'contact:creat_new_contact' %}"
+                                   class="btn btn-default btn-sm">افزودن</a>
+                                <div class="pull-left">
+                                    <div class="btn-group">
+                                        {% if page_obj.has_previous %}
+                                            <a type="button" href="?page={{ page_obj.previous_page_number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                                               class="btn btn-default btn-sm"><i
+                                                    class="fa fa-chevron-right"></i>
+                                            </a>
+
+                                        {% endif %}
+                                        <div class="btn-group me-2" role="group" aria-label="First group">
+                                            {% for num_page in page_obj.paginator %}
+                                                <a type="button" href="?page={{ num_page.number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                                                   class="btn btn-outline-secondary {% if num_page.number == page_obj.number %}active{% endif %}">{{ num_page.number }}</a>
+                                            {% endfor %}
+
+
+                                        </div>
+                                        {% if page_obj.has_next %}
+                                            <a type="button" href="?page={{ page_obj.next_page_number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                                               class="btn btn-default btn-sm"><i
+                                                    class="fa fa-chevron-left"></i>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                    <!-- /.btn-group -->
+                                </div>
+
+                                <!-- /.pull-right -->
+                            </div>
+
+                        </div>
+                    </form>
+                    {#end form#}
+                </div>
+
+                <!-- /. box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock %}
+

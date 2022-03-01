@@ -1,0 +1,124 @@
+{% extends '_shared/_MainLayout.html' %}
+
+
+{% block content %}
+    <section class="content">
+
+        <div class="row">
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true"> کاربر جدید</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- /.tab-pane -->
+                        <!-- /.tab-pane -->
+
+                        <div class="tab-pane active" id="settings">
+                            <form action="{% url 'contact:creat_new_contact' %}" method="post" class="form-horizontal">
+                                {% csrf_token %}
+
+
+
+
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label">نام</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputName"
+                                               name="{{ create_contact_form.name.html_name }}" placeholder="نام">
+                                        <ol>
+                                        {% for error in create_contact_form.name.errors %}
+                                            <li class="text-danger">
+                                                {{ error }}
+                                            </li>
+                                        {% endfor %}
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label">نام خانوادگی</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputName"
+                                               name="{{ create_contact_form.family.html_name }}"
+                                               placeholder="نام خانوادگی">
+                                        <ol>
+                                            {% for error in create_contact_form.family.errors %}
+                                            <li class="text-danger">
+                                                {{ error }}
+                                            </li>
+                                        {% endfor %}
+                                        </ol>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputSkills" class="col-sm-2 control-label ">شماره تلفن</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputSkills"
+                                               name="{{ create_contact_form.phone.html_name }}"
+                                               placeholder="شماره تلفن">
+                                        <ol>
+                                            {% for error in create_contact_form.phone.errors %}
+                                            <li class="text-danger">
+                                                {{ error }}
+                                            </li>
+                                        {% endfor %}
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-sm-2 control-label">ایمیل</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEmail"
+                                               name="{{ create_contact_form.email.html_name }}" placeholder="ایمیل">
+                                        <ol>
+                                            {% for error in create_contact_form.email.errors %}
+                                            <li class="text-danger">
+                                                {{ error }}
+                                            </li>
+                                        {% endfor %}
+                                        </ol>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputExperience" class="col-sm-2 control-label">ادرس</label>
+
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="inputExperience"
+                                                  name="{{ create_contact_form.address.html_name }}"
+                                                  placeholder="ادرس"></textarea>
+                                        <ol>
+                                            {% for error in create_contact_form.address.errors %}
+                                            <li class="text-danger">
+                                                {{ error }}
+                                            </li>
+                                        {% endfor %}
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-warning ">ارسال</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+{% endblock %}
