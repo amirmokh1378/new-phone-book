@@ -57,6 +57,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # cache
+
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'new_phone_book.urls'
@@ -90,17 +95,31 @@ WSGI_APPLICATION = 'new_phone_book.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'PASSWORD': '',
+#         'NAME': 'phone_book',
+#         'USER': 'root',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         },
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'PASSWORD': '',
-        'NAME': 'phone_book',
-        'USER': 'root',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'test1',
+        'USER': 'postgres',
+        'PASSWORD': 'amir',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        },
+        'PORT': '5432',
+        # 'OPTIONS': {
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        # },
     }
 }
 
@@ -152,14 +171,31 @@ MEDIA_ROOT = BASE_DIR / "static_cdn/static_media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # db engin
+
+# user = DATABASES['default']['USER']
+# password = DATABASES['default']['PASSWORD']
+# database_name = DATABASES['default']['NAME']
+#
+# database_url = 'mysql://{user}:{password}@localhost:3306/{database_name}'.format(
+#     user=user,
+#     password=password,
+#     database_name=database_name,
+# )
+# engine = create_engine(database_url, echo=False)
+
 
 user = DATABASES['default']['USER']
 password = DATABASES['default']['PASSWORD']
 database_name = DATABASES['default']['NAME']
 
-database_url = 'mysql://{user}:{password}@localhost:3306/{database_name}'.format(
+# database_url = 'mysql://{user}:{password}@localhost:3306/{database_name}'.format(
+#     user=user,
+#     password=password,
+#     database_name=database_name,
+# )
+
+database_url = 'postgresql://{user}:{password}@127.0.0.1:5432/{database_name}'.format(
     user=user,
     password=password,
     database_name=database_name,
@@ -193,3 +229,16 @@ engine = create_engine(database_url, echo=False)
 #         }
 #     }
 # }
+
+
+# cache
+# https://docs.djangoproject.com/en/4.0/topics/cache/
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#         'LOCATION': 'my_cache_table',
+#     }
+# }
+# CACHE_MIDDLEWARE_SECONDS = 3 * 60
+# CACHE_MIDDLEWARE_ALIAS = 'amir'

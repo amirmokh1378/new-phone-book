@@ -11,6 +11,7 @@ class CreateContactForm(forms.ModelForm):
     def save(self, user, commit=True):
         obj = super(CreateContactForm, self).save(commit=False)
         obj.user = user
+        obj.id = Contact.objects.get_max_id_or_1()
         obj.save()
 
 

@@ -8,6 +8,7 @@ from .views import (
     ContactDetailView,
     add_contact_by_file_view,
 )
+from django.views.decorators.cache import cache_page
 
 app_name = 'phone_book_contacts'
 

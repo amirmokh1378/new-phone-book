@@ -34,11 +34,11 @@ class ContactManager(models.Manager):
 
 
 class Contact(models.Model):
-    name = models.CharField(max_length=20)
-    family = models.CharField(max_length=20, blank=True, default='')
-    email = models.EmailField(max_length=100, blank=True, default='')
-    phone = models.CharField(max_length=10, blank=True, default='')
-    address = models.TextField(max_length=400, blank=True, default='')
+    name = models.CharField(max_length=200)
+    family = models.CharField(max_length=200, blank=True, default='', null=True)
+    email = models.EmailField(max_length=200, blank=True, default='', null=True)
+    phone = models.CharField(max_length=100, blank=True, default='', null=True)
+    address = models.TextField(max_length=2000, blank=True, default='', null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     objects = ContactManager()

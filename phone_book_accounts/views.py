@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, get_user_model, login, logout
-
+from django.views.decorators.cache import cache_page
 
 User = get_user_model()
 
@@ -12,6 +12,7 @@ def login_view(request):
     form = LoginForm(request.POST or None)
     context = {
         'login_form': form,
+        'body': 'hold-transition login-page',
     }
 
     if form.is_valid():
@@ -32,7 +33,7 @@ def register_view(request):
     form = RegisterForm(request.POST or None)
     context = {
         'register_form': form,
-
+        'body': 'hold-transition register-page'
     }
 
     if form.is_valid():
