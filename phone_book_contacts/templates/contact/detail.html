@@ -23,31 +23,40 @@
                         </p>
 
                         <hr>
-                        <strong><i class="fa fa-book margin-r-5"></i> خانوادگی</strong>
+                        <strong><i class="fa fa-book margin-r-5"></i> تلفن کار</strong>
 
                         <p class="text-muted">
-                            {{ object.family }}
+                            {% if object.tel_work %}
+                            {{ object.tel_work }}
+                            {% endif %}
+
                         </p>
 
                         <hr>
-                        <strong><i class="fa fa-pencil margin-r-5"></i>شماره</strong>
+                        <strong><i class="fa fa-pencil margin-r-5"></i>شماره موبایل</strong>
 
                         <p>
-                            {{ object.phone }}
+                            {% if object.phone %}
+                                {{ object.phone }}
+                            {% endif %}
                         </p>
 
                         <hr>
-                        <strong><i class="fa fa-pencil margin-r-5"></i>ایمیل</strong>
+                        <strong><i class="fa fa-pencil margin-r-5"></i>تلفن خانه</strong>
 
                         <p>
-                            {{ object.email }}
+                            {% if object.tel_home %}
+                            {{ object.tel_home }}
+                            {% endif %}
                         </p>
 
                         <hr>
 
-                        <strong><i class="fa fa-map-marker margin-r-5"></i> ادرس</strong>
+                        <strong><i class="fa fa-map-marker margin-r-5"></i> توضیحات</strong>
 
-                        <p class="text-muted">{{ object.address}}</p>
+                        <p class="text-muted">{% if object.comment %}
+                            {{ object.comment}}
+                        {% endif %} </p>
 
 
 

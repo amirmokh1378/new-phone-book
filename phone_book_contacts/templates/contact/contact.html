@@ -11,7 +11,7 @@
                         <form class="box-tools pull-right" action="{% url 'phone_book_contacts:show_contact' %}">
                             <div class="has-feedback">
                                 <input type="text" value="{% if search_by %}{{ search_by }}{% endif %}" name="search_by" class="form-control input-sm"
-                                       placeholder="نام, فامیلی, ایمیل و شماره">
+                                       placeholder="نام, شماره تلفن, شماره خانه">
                                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </form>
@@ -74,8 +74,8 @@
                                     <tr>
                                         <td></td>
                                         <th class="mailbox-name"> نام و نام خانوادگی</th>
-                                        <th class="mailbox-subject">نام خانوادگی</th>
-                                        <th class="mailbox-subject">شماره</th>
+                                        <th class="mailbox-subject">شماره خانه</th>
+                                        <th class="mailbox-subject">شماره موبایل</th>
 
                                         <th class="mailbox-date">حذف</th>
                                         <th class="mailbox-date">جزییات</th>
@@ -85,8 +85,12 @@
                                         <tr>
                                             <td><input type="checkbox" name="id" form="outer" value="{{ contact.id }}"></td>
                                             <td class="mailbox-name">{{ contact.name }}</td>
-                                            <td class="mailbox-name">{{ contact.family }}</td>
-                                            <td class="mailbox-name">{{ contact.phone }}</td>
+                                            <td class="mailbox-name">{% if contact.tel_home %}
+                                            {{ contact.tel_home }}
+                                            {% endif %} </td>
+                                            <td class="mailbox-name">{% if contact.phone %}
+                                            {{ contact.phone }}
+                                            {% endif %} </td>
                                             <td class="mailbox-attachment">
                                                 <form action="{% url 'phone_book_contacts:delete_contact' %}" id="inner{{ contact.id }}" method="post">
                                                     {% csrf_token %}

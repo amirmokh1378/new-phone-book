@@ -39,14 +39,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputName" class="col-sm-2 control-label">نام خانوادگی</label>
+                                    <label for="inputName" class="col-sm-2 control-label">تلفن کار</label>
 
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputName"
-                                               name="{{ create_contact_form.family.html_name }}"
-                                               placeholder="نام خانوادگی">
+                                               name="{{ create_contact_form.tel_work.html_name }}"
+                                               placeholder="تلفن کار">
                                         <ol>
-                                            {% for error in create_contact_form.family.errors %}
+                                            {% for error in create_contact_form.tel_work.errors %}
                                             <li class="text-danger">
                                                 {{ error }}
                                             </li>
@@ -56,12 +56,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputSkills" class="col-sm-2 control-label ">شماره تلفن</label>
+                                    <label for="inputSkills" class="col-sm-2 control-label ">شماره موبایل</label>
 
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputSkills"
                                                name="{{ create_contact_form.phone.html_name }}"
-                                               placeholder="شماره تلفن">
+                                               placeholder="شماره موبایل">
                                         <ol>
                                             {% for error in create_contact_form.phone.errors %}
                                             <li class="text-danger">
@@ -72,13 +72,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail" class="col-sm-2 control-label">ایمیل</label>
+                                    <label for="inputEmail" class="col-sm-2 control-label">تلفن خانه</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail"
-                                               name="{{ create_contact_form.email.html_name }}" placeholder="ایمیل">
+                                        <input type="text" class="form-control" id="inputEmail"
+                                               name="{{ create_contact_form.tel_home.html_name }}" placeholder="تلفن خانه">
                                         <ol>
-                                            {% for error in create_contact_form.email.errors %}
+                                            {% for error in create_contact_form.tel_home.errors %}
                                             <li class="text-danger">
                                                 {{ error }}
                                             </li>
@@ -87,15 +87,16 @@
                                     </div>
                                 </div>
 
+
                                 <div class="form-group">
-                                    <label for="inputExperience" class="col-sm-2 control-label">ادرس</label>
+                                    <label for="inputExperience" class="col-sm-2 control-label">توضیحات</label>
 
                                     <div class="col-sm-10">
                                         <textarea class="form-control" id="inputExperience"
-                                                  name="{{ create_contact_form.address.html_name }}"
-                                                  placeholder="ادرس"></textarea>
+                                                  name="{{ create_contact_form.comment.html_name }}"
+                                                  placeholder="توضیحات"></textarea>
                                         <ol>
-                                            {% for error in create_contact_form.address.errors %}
+                                            {% for error in create_contact_form.comment.errors %}
                                             <li class="text-danger">
                                                 {{ error }}
                                             </li>

@@ -29,13 +29,13 @@ class SearchContactListView(LoginRequiredMixin, ListView):
     model = Contact
     template_name = 'contact/search.html'
     login_url = 'phone_book_contacts:login'
-    paginate_by = 10
+    paginate_by = 25
 
     def get_context_data(self, *args, object_list=None, **kwargs):
         context = super(SearchContactListView, self).get_context_data(*args, object_list=object_list, **kwargs)
 
         context[
-            'search_by'] = '&name__icontains=' + f"{self.request.GET.get('name__icontains') or ''}" + '&family__icontains=' + f"{self.request.GET.get('family__icontains') or ''}" + '&phone__icontains=' + f"{self.request.GET.get('phone__icontains') or ''}" + '&email__icontains=' + f"{self.request.GET.get('email__icontains') or ''}" + '&address__icontains=' + f"{self.request.GET.get('address__icontains') or ''}"
+            'search_by'] = '&name__icontains=' + f"{self.request.GET.get('name__icontains') or ''}" + '&tel_work__icontains=' + f"{self.request.GET.get('tel_work__icontains') or ''}" + '&phone__icontains=' + f"{self.request.GET.get('phone__icontains') or ''}" + '&tel_home__icontains=' + f"{self.request.GET.get('tel_home__icontains') or ''}" + '&comment__icontains=' + f"{self.request.GET.get('comment__icontains') or ''}"
         return context
 
     def get_queryset(self):
@@ -58,7 +58,7 @@ class ContactListView(LoginRequiredMixin, ListView):
     model = Contact
     template_name = 'contact/contact.html'
     login_url = 'phone_book_accounts:login'
-    paginate_by = 10
+    paginate_by = 25
 
     def get_context_data(self, *args, object_list=None, **kwargs):
         context = super(ContactListView, self).get_context_data(*args, object_list=object_list, **kwargs)
@@ -130,7 +130,10 @@ def add_contact_by_file_view(request):
                     add_file_form.add_error('file', 'فایل باید اکسل یا سی اس وی باشد')
                     return render(request, template_name='contact/add_contact_by_file.html', context=context)
                 data_frame_key_list = df.keys()
-                field_list = ['name', 'family', 'email', 'phone', 'address']
+                # field_list = ['name', 'family', 'email', 'phone', 'address']
+                field_list = [field.name for field in Contact._meta.get_fields()]
+                field_list.pop(0)
+                field_list.pop()
                 data_frame_key_list, fields_not_in_data_frame_keys_list = get_equal_items_list_one_in_list_tow(
                     field_list, data_frame_key_list)
                 if len(fields_not_in_data_frame_keys_list) != 0:

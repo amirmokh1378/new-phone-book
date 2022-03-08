@@ -9,10 +9,10 @@ class ContactFilter(django_filters.FilterSet):
         model = Contact
         fields = {
             'name': ['icontains'],
-            'family': ['icontains'],
+            'tel_work': ['icontains'],
             'phone': ['icontains'],
-            'email': ['icontains'],
-            'address': ['icontains']
+            'comment': ['icontains'],
+            'tel_home': ['icontains']
         }
 
     # def search_by_name_phone_email_family_filter(self, queryset, name, value):

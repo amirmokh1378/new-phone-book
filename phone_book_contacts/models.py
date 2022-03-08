@@ -14,12 +14,12 @@ from django.db.models import Q
 
 
 class ContactManager(models.Manager):
-    def search(self, user, name='', family='', email='', phone='', num_company_or_home='', address='',
-               ):
-        lookup = Q(name__icontains=name) & Q(family__icontains=family) & Q(email__icontains=email) & Q(
-            phone__icontains=phone) & Q(num_company_or_home__icontains=num_company_or_home) & Q(
-            address__icontains=address)
-        return user.contact_set.filter(lookup).distinct()
+    # def search(self, user, name='', family='', email='', phone='', num_company_or_home='', address='',
+    #            ):
+    #     lookup = Q(name__icontains=name) & Q(family__icontains=family) & Q(email__icontains=email) & Q(
+    #         phone__icontains=phone) & Q(num_company_or_home__icontains=num_company_or_home) & Q(
+    #         address__icontains=address)
+    #     return user.contact_set.filter(lookup).distinct()
 
     def get_max_id_or_1(self):
         id__max = self.aggregate(models.Max('id'))['id__max']
@@ -28,18 +28,19 @@ class ContactManager(models.Manager):
         return id__max or 1
 
     def search_by_or_name_phone_email_family(self, user, search_by=''):
-        lookup = Q(name__icontains=search_by) | Q(family__icontains=search_by) | Q(email__icontains=search_by) | Q(
+        lookup = Q(name__icontains=search_by) | Q(tel_home__icontains=search_by) | Q(
             phone__icontains=search_by)
         return user.contact_set.filter(lookup).distinct()
 
 
 class Contact(models.Model):
     name = models.CharField(max_length=200)
-    family = models.CharField(max_length=200, blank=True, default='', null=True)
-    email = models.EmailField(max_length=200, blank=True, default='', null=True)
     phone = models.CharField(max_length=100, blank=True, default='', null=True)
-    address = models.TextField(max_length=2000, blank=True, default='', null=True)
+    tel_work = models.CharField(max_length=100, blank=True, default='', null=True)
+    tel_home = models.CharField(max_length=100, blank=True, default='', null=True)
+    comment = models.TextField(max_length=2000, blank=True, default='', null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     objects = ContactManager()
 
