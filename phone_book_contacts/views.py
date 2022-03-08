@@ -33,6 +33,17 @@ class SearchContactListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *args, object_list=None, **kwargs):
         context = super(SearchContactListView, self).get_context_data(*args, object_list=object_list, **kwargs)
+        page_nums = [1]
+        current_page = context['page_obj'].number
+        if context['page_obj'].has_previous() and current_page >= 3:
+            page_nums.append(context['page_obj'].previous_page_number())
+        if current_page != 1:
+            page_nums.append(current_page)
+        if context['page_obj'].has_next() and context['page_obj'].paginator.num_pages - 1 > current_page:
+            page_nums.append(context['page_obj'].next_page_number())
+        if page_nums.count(context['page_obj'].paginator.num_pages) == 0:
+            page_nums.append(context['page_obj'].paginator.num_pages)
+        context['page_nums'] = page_nums
 
         context[
             'search_by'] = '&name__icontains=' + f"{self.request.GET.get('name__icontains') or ''}" + '&tel_work__icontains=' + f"{self.request.GET.get('tel_work__icontains') or ''}" + '&phone__icontains=' + f"{self.request.GET.get('phone__icontains') or ''}" + '&tel_home__icontains=' + f"{self.request.GET.get('tel_home__icontains') or ''}" + '&comment__icontains=' + f"{self.request.GET.get('comment__icontains') or ''}"
@@ -63,6 +74,17 @@ class ContactListView(LoginRequiredMixin, ListView):
     def get_context_data(self, *args, object_list=None, **kwargs):
         context = super(ContactListView, self).get_context_data(*args, object_list=object_list, **kwargs)
         context['search_by'] = self.request.GET.get('search_by')
+        page_nums = [1]
+        current_page = context['page_obj'].number
+        if context['page_obj'].has_previous() and current_page >= 3:
+            page_nums.append(context['page_obj'].previous_page_number())
+        if current_page != 1:
+            page_nums.append(current_page)
+        if context['page_obj'].has_next() and context['page_obj'].paginator.num_pages - 1 > current_page:
+            page_nums.append(context['page_obj'].next_page_number())
+        if page_nums.count(context['page_obj'].paginator.num_pages) == 0:
+            page_nums.append(context['page_obj'].paginator.num_pages)
+        context['page_nums'] = page_nums
         return context
 
     def get_queryset(self):

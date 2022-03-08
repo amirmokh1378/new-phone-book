@@ -51,8 +51,11 @@
 
                                         {% endif %}
                                             <div class="btn-group me-2" role="group" aria-label="First group">
-                                                {% for num_page in page_obj.paginator %}
-                                                    <a type="button" href="?page={{num_page.number}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary {% if num_page.number == page_obj.number %}active{% endif %}">{{ num_page.number }}</a>
+{#                                                {% for num_page in page_obj.paginator %}#}
+{#                                                    <a type="button" href="?page={{num_page.number}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary {% if num_page.number == page_obj.number %}active{% endif %}">{{ num_page.number }}</a>#}
+{#                                                {% endfor %}#}
+                                            {% for num_page in page_nums %}
+                                                    <a type="button" href="?page={{num_page}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary {% if num_page == page_obj.number %}active{% endif %}">{{ num_page }}</a>
                                                 {% endfor %}
 
 
@@ -149,8 +152,11 @@
 
                                         {% endif %}
                                             <div class="btn-group me-2" role="group" aria-label="First group">
-                                                {% for num_page in page_obj.paginator %}
-                                                    <a type="button" href="?page={{num_page.number}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary {% if num_page.number == page_obj.number %}active{% endif %}">{{ num_page.number }}</a>
+{#                                                {% for num_page in page_obj.paginator %}#}
+{#                                                    <a type="button" href="?page={{num_page.number}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary {% if num_page.number == page_obj.number %}active{% endif %}">{{ num_page.number }}</a>#}
+{#                                                {% endfor %}#}
+                                                {% for num_page in page_nums %}
+                                                    <a type="button" href="?page={{num_page}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary {% if num_page == page_obj.number %}active{% endif %}">{{ num_page }}</a>
                                                 {% endfor %}
 
 
