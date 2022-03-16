@@ -8,10 +8,13 @@ class CreateContactForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['user']
 
-    def save(self, user, commit=True):
+    def save(self, user, id, commit=True):
         obj = super(CreateContactForm, self).save(commit=False)
         obj.user = user
-        obj.id = Contact.objects.get_max_id_or_1()
+        if id is None:
+            obj.id = Contact.objects.get_max_id_or_1()
+        else:
+            obj.id=id
         obj.save()
 
 

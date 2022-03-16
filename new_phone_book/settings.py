@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'phone_book_accounts',
     'phone_book_contacts',
     'django_filters',
+    'django_cleanup.apps.CleanupConfig',
     # 'allauth',
     # 'allauth.account',
     # 'allauth.socialaccount',
@@ -202,34 +203,10 @@ database_url = 'postgresql://{user}:{password}@127.0.0.1:5432/{database_name}'.f
 )
 engine = create_engine(database_url, echo=False)
 
-# AUTHENTICATION_BACKENDS
-#
-# AUTHENTICATION_BACKENDS = [
-#     'django.contrib.auth.backends.ModelBackend',
-#     'allauth.account.auth_backends.AuthenticationBackend'
-# ]
-#
-# SITE_ID = 1
-# LOGIN_REDIRECT_URL = '/'
-#
-# # Additional configuration settings
-# SOCIALACCOUNT_QUERY_EMAIL = True
-# ACCOUNT_LOGOUT_ON_GET= True
-# ACCOUNT_UNIQUE_EMAIL = True
-# ACCOUNT_EMAIL_REQUIRED = True
-#
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         'SCOPE': [
-#             'profile',
-#             'email',
-#         ],
-#         'AUTH_PARAMS': {
-#             'access_type': 'online',
-#         }
-#     }
-# }
+# custom user model
+# https://docs.djangoproject.com/en/4.0/topics/auth/customizing/
 
+AUTH_USER_MODEL = 'phone_book_accounts.CustomUser'
 
 # cache
 # https://docs.djangoproject.com/en/4.0/topics/cache/

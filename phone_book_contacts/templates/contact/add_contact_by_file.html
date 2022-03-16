@@ -3,12 +3,12 @@
     <section>
         <div class="login-box">
             <div class="login-logo">
-                <a href="{% url 'phone_book_contacts:add_contacts_by_file' %}"><b>افزودن با اکسل</b></a>
+                <a href="{% url 'phone_book_contacts:add_contacts_by_file' request.user %}"><b>افزودن با اکسل</b></a>
             </div>
             <div class="login-box-body">
                 <p class="login-box-msg">فرم زیر را تکمیل کنید و ورود بزنید</p>
 
-                <form action="{% url 'phone_book_contacts:add_contacts_by_file' %}" enctype="multipart/form-data"
+                <form action="{% url 'phone_book_contacts:add_contacts_by_file' request.user%}" enctype="multipart/form-data"
                       method="post">
                     {% csrf_token %}
                     <div class="form-group has-feedback">
@@ -18,12 +18,22 @@
                             </li>
                         {% endfor %}
                         <input type="file" name="file" class="form-control" placeholder="Excel یا CSV">
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
-                    <div class="row">
+                    <div class="row mt-1 gx-5">
+                        <div class="col-2"><span>عمومی:</span></div>
+                        <div class="col">
+                            <label class="form-check-label" for="flexRadioDefault1">بله</label>
+
+                            <input class="form-check-input" type="radio" name="is_public"   id="flexRadioDefault1" value="بله">
+                            <label class="form-check-label" for="flexRadioDefault2">خیر</label>
+
+                            <input class="form-check-input" type="radio" name="is_public" checked  id="flexRadioDefault2" value="خیر">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
                         <!-- /.col -->
                         <div class="col-xs-12">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">ارسال</button>
+                            <button type="submit" class="btn btn-primary btn-block ">ارسال</button>
                         </div>
                         <!-- /.col -->
                     </div>

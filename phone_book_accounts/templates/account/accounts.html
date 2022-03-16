@@ -1,0 +1,54 @@
+{% extends '_shared/_MainLayout.html' %}
+{% block content %}
+    <section class="mt-4">
+    <div class="container text text_align">
+        <div class="row justify-content-end mb-1 mt-1 me-1">
+            <div class="col-auto ">
+                <form action="{% url 'phone_book_accounts:users' %}">
+                    <input type="text"  name="search_by" value="{{ request.GET.search_by }}" class="form-control input-sm text p-1 p-sm-auto "
+                           placeholder="نام کاربری">
+
+                </form>
+            </div>
+        </div>
+        <p class="">کاربران</p>
+
+        <div class="row gy-1">
+            {% for user in object_list %}
+
+                {% include 'account/components/acount_component.html' %}
+            {% endfor %}
+
+        </div>
+        <div class="row justify-content-center  mt-3">
+            <div class="col-auto me-sm-1">
+                <div class="btn-group  btn-padding " role="group" aria-label="First group">
+                    {% if page_obj.has_previous %}
+                    <a type="button" href="?page={{page_obj.previous_page_number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-default bg-gray-l btn-sm btn-padding line-height">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                             class="bi bi-chevron-compact-right icon-size" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
+                        </svg>
+                    </a>
+                {% endif %}
+                    {% for num_page in page_nums %}
+                    <a type="button" href="?page={{num_page}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary {% if num_page == page_obj.number %}active{% endif %}"
+                       class="btn btn-default btn-sm text btn-padding line-height">{{ num_page }}</a>
+                    {% endfor %}
+                {% if page_obj.has_next %}
+                    <a type="button" href="?page={{page_obj.next_page_number}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                       class="btn btn-default bg-gray-l btn-sm btn-padding line-height">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                             class="bi bi-chevron-compact-left icon-size" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
+                        </svg>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

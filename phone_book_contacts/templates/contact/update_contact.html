@@ -2,7 +2,7 @@
 {{% block content %}
     <section>
     <div class="container  border">
-        <form action="{% url 'phone_book_contacts:creat_new_contact' user %}" method="post">
+        <form action="{% url 'phone_book_contacts:update_contact' user contact_object.id %}" method="post">
         {% csrf_token %}
         <div class="row p-1">
             <div class="col-auto">
@@ -18,7 +18,7 @@
                     <span >نام و نام خانوادگی:</span>
                 </div>
                 <div class="col">
-                    <input type="text" name="{{ create_contact_form.name.html_name }}"  class="updateTextInput form-control input-sm text p-1 p-sm-auto">
+                    <input type="text" name="{{ create_contact_form.name.html_name }}" value="{{ contact_object.name }}" class="updateTextInput form-control input-sm text p-1 p-sm-auto">
                     <ol>
                         {% for error in create_contact_form.name.errors %}
                             <li class="text-danger">
@@ -33,10 +33,10 @@
                 <div class="col-2">
                     <label class="form-check-label" for="flexRadioDefault1">بله</label>
 
-                    <input class="form-check-input" type="radio" name="{{ create_contact_form.is_public.html_name }}"   id="flexRadioDefault1" value="بله">
+                    <input class="form-check-input" type="radio" name="{{ create_contact_form.is_public.html_name }}" {% if contact_object.is_public == 'بله' %}checked {% endif %}   id="flexRadioDefault1" value="بله">
                     <label class="form-check-label" for="flexRadioDefault2">خیر</label>
 
-                    <input class="form-check-input" type="radio" name="{{ create_contact_form.is_public.html_name }}" checked  id="flexRadioDefault2" value="خیر">
+                    <input class="form-check-input" type="radio" name="{{ create_contact_form.is_public.html_name }}" {% if contact_object.is_public == 'خیر' %}checked {% endif %} id="flexRadioDefault2" value="خیر">
                     <ol>
                     {% for error in create_contact_form.is_public.errors %}
                         <li class="text-danger">
@@ -52,7 +52,7 @@
                     <span>شماره خانه:</span>
                 </div>
                 <div class="col">
-                    <input type="text" name="{{ create_contact_form.tel_home.html_name }}"  class="updateTextInput form-control input-sm text p-1 p-sm-auto"  >
+                    <input type="text" name="{{ create_contact_form.tel_home.html_name }}" value="{% if contact_object.tel_home %}{{ contact_object.tel_home }}{% endif %} " class="updateTextInput form-control input-sm text p-1 p-sm-auto"  >
 
 
                     <ol>
@@ -70,7 +70,7 @@
                     <span>شماره شرکت:</span>
                 </div>
                 <div class="col">
-                    <input type="text" name="{{ create_contact_form.tel_work.html_name }}"  class="updateTextInput form-control input-sm text p-1 p-sm-auto"  >
+                    <input type="text" name="{{ create_contact_form.tel_work.html_name }}" value="{% if contact_object.tel_work %}{{ contact_object.tel_work }}{% endif %}" class="updateTextInput form-control input-sm text p-1 p-sm-auto"  >
                     <ol>
                         {% for error in create_contact_form.tel_work.errors %}
                             <li class="text-danger">
@@ -85,7 +85,7 @@
                     <span>شماره موبایل:</span>
                 </div>
                 <div class="col">
-                    <input type="text" name="{{ create_contact_form.phone.html_name }}"  class="updateTextInput form-control input-sm text p-1 p-sm-auto"  >
+                    <input type="text" name="{{ create_contact_form.phone.html_name }}" value="{% if contact_object.phone %}{{ contact_object.phone }}{% endif %}" class="updateTextInput form-control input-sm text p-1 p-sm-auto"  >
                     <ol>
                         {% for error in create_contact_form.phone.errors %}
                             <li class="text-danger">
@@ -97,8 +97,7 @@
                 <div class="col-12 border-bottom"></div>
                 <div class="col-3 col-sm-2"><span>توضیحات:</span></div>
                 <div class="col">
-                    <textarea name="{{ create_contact_form.comment.html_name }}"  class="form-control input-sm text p-1 p-sm-auto comment" >
-                </textarea>
+                    <textarea name="{{ create_contact_form.comment.html_name }}"  class="form-control input-sm text p-1 p-sm-auto comment" >{% if contact_object.comment %}{{ contact_object.comment }}{% endif %}</textarea>
                     <ol>
                         {% for error in create_contact_form.comment.errors %}
                             <li class="text-danger">

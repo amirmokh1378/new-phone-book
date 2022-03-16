@@ -1,0 +1,263 @@
+
+{% if user.username == request.user.username %}
+    <section class="text_align text">
+        <div class="container">
+
+            <div class="row justify-content-end mb-1 mt-1 me-1">
+                <div class="col-auto ">
+                    <form action="{% url 'phone_book_contacts:show_contact' user %}" method="get" id="s">
+                        <input type="text" value="{% if search_by %}{{ search_by }}{% endif %}" name="search_by" form="s" class="form-control input-sm text p-1 p-sm-auto "
+                               placeholder="نام, شماره تلفن, شماره خانه">
+                    </form>
+                </div>
+            </div>
+        <form action="{% url 'phone_book_contacts:delete_list_contact' request.user%}" method="post" id="deleteForm">
+        {% csrf_token %}
+        <form action=""></form>
+        <form action="{% url 'phone_book_contacts:update_contact_publication' request.user %}" method="post" id="updateContactPublicationForm">
+        {% csrf_token %}
+        <form action=""></form>
+
+
+
+            <div class="row justify-content-between  mb-1">
+                <div class="col-auto ">
+                    <div class="btn-group btn-padding ">
+
+                        <button type="submit" form="deleteForm" class="btn bg-gray-l btn-default btn-sm btn-padding line-height">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-trash3-fill icon-size"
+                                 viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                            </svg>
+                        </button>
+                        <a type="button" href="{% url 'phone_book_contacts:creat_new_contact' user %}" class="btn btn-default bg-gray-l btn-sm text btn-padding text line-height">
+                            افزودن
+                        </a>
+                        <button type="button" id="changeState"
+                                class="btn btn-default bg-gray-l btn-sm text btn-padding text line-height">
+                            تغییر وضعیت
+                        </button>
+                        <button type="submit" id="save" style="display: none" form="updateContactPublicationForm"
+                                class="btn btn-default bg-gray-l btn-sm text btn-padding text line-height">
+                            <i class="fa fa-save icon-size"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="col-auto me-sm-1">
+                    <div class="btn-group  btn-padding " role="group" aria-label="First group">
+                    {% if page_obj.has_previous %}
+                        <a type="button" href="?page={{page_obj.previous_page_number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-default bg-gray-l btn-sm btn-padding line-height">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                 class="bi bi-chevron-compact-right icon-size" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
+                            </svg>
+                        </a>
+                    {% endif %}
+                        {% for num_page in page_nums %}
+                        <a type="button" href="?page={{num_page}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary text btn-padding line-height btn-sm {% if num_page == page_obj.number %}active{% endif %}"
+                           >{{ num_page }}</a>
+                        {% endfor %}
+                    {% if page_obj.has_next %}
+                        <a type="button" href="?page={{page_obj.next_page_number}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                           class="btn btn-default bg-gray-l btn-sm btn-padding line-height">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                 class="bi bi-chevron-compact-left icon-size" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+
+                {% csrf_token %}
+                    <table class="table table-striped table-hover text-align mb-1">
+                        <tr class="bg-gray-l">
+                            <th>
+                                <input class="form-check-input"  id="allDeleteCheckBox" form="ww" type="checkbox" >
+                            </th>
+                            <th>
+                                نام و نام خانوادگی
+                            </th>
+                            <th>
+                                شماره موبایل
+                            </th>
+                            <th>
+                                شماره کار
+                            </th>
+                            <th>
+                                شماره خانه
+                            </th>
+                            <th>
+                                عمومی
+                                <input class="form-check-input" style="display: none" id="allStateCheckBox" type="checkbox" >
+                            </th>
+                            <th>
+                                <span>تغییر</span>
+                            </th>
+                                <th>
+                                حذف
+                                </th>
+                        </tr>
+
+                        {% for contact in  object_list %}
+                        <tr>
+                            <td>
+                                <input class="form-check-input deleteCheckBox" form="deleteForm" name="id" type="checkbox" value="{{contact.id}}">
+                            </td>
+                            <td >
+                                <a href="#update" id="{{ contact.id }}">
+                                    <span id="name{{ contact.id }}">{{ contact.name }}</span>
+                                </a>
+                            </td>
+                            <td >
+                                <span id="phone{{ contact.id }}">{% if contact.phone  %}{{ contact.phone }}{% endif %} </span>
+                            </td>
+                            <td >
+                                <span id="telWork{{ contact.id }}">{% if contact.tel_work  %}{{ contact.tel_work }}{% endif %}</span>
+                            </td>
+                            <td >
+                                <span id="telHome{{ contact.id }}">{% if contact.tel_home  %}{{ contact.tel_home }}{% endif %}</span>
+                            </td>
+                            <td hidden >
+                                <span id="comment{{ contact.id }}">{% if contact.comment  %}{{ contact.comment }}{% endif %}</span>
+                            </td>
+                            <td hidden>
+                                <input type="text" name="id"  value="{{ contact.id }}">
+                            </td>
+                            <td>
+                                <span class="state" id="state2">{{ contact.is_public }}</span>
+                                <span class="value" style="display: none" >خیر</span>
+                                <input class="form-check-input stateCheckBoxNo" form="updateContactPublicationForm" style="display: none"  type="checkbox" name="no" value="{{ contact.id }}">
+                                <span class="value" style="display: none" >بله</span>
+                                <input class="form-check-input stateCheckBoxYes" form="updateContactPublicationForm" style="display: none" type="checkbox" name="yes" value="{{ contact.id }}">
+                            </td>
+                            <td>
+                                <a type="button" href="{% url 'phone_book_contacts:update_contact' user contact.id %}" class="btn btn-warning btn-sm text btn-padding line-height" >اپدیت</a>
+                            </td>
+                            <td>
+                                <form action="{% url 'phone_book_contacts:delete_contact' request.user%}" id="inner{{ contact.id }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="text" hidden name="id" form="inner{{ contact.id }}"
+                                           value="{{ contact.id }}">
+                                    <button type="submit" class="btn btn-danger btn-sm text btn-padding line-height" form="inner{{ contact.id }}">حذف</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+
+                    </table>
+
+                </div>
+            </div>
+        </form>
+        </form>
+
+        </div>
+    </section>
+
+{% else %}
+    <section class="text_align text">
+    <div class="container">
+        <div class="row justify-content-end mb-1 mt-1 me-1">
+            <div class="col-auto ">
+                <form action="{% url 'phone_book_contacts:show_contact' user %}">
+                    <input type="text" value="{% if search_by %}{{ search_by }}{% endif %}" name="search_by" class="form-control input-sm text p-1 p-sm-auto "
+                           placeholder="نام, شماره تلفن, شماره خانه">
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-end  mb-1">
+            <div class="col-auto me-sm-1">
+                <div class="btn-group  btn-padding " role="group" aria-label="First group">
+                {% if page_obj.has_previous %}
+                    <a type="button" href="?page={{page_obj.previous_page_number }}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-default bg-gray-l btn-sm btn-padding line-height">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                             class="bi bi-chevron-compact-right icon-size" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
+                        </svg>
+                    </a>
+                {% endif %}
+                    {% for num_page in page_nums %}
+                    <a type="button" href="?page={{num_page}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}" class="btn btn-outline-secondary {% if num_page == page_obj.number %}active{% endif %}"
+                       class="btn btn-default btn-sm text btn-padding line-height">{{ num_page }}</a>
+                    {% endfor %}
+                {% if page_obj.has_next %}
+                    <a type="button" href="?page={{page_obj.next_page_number}}{% if search_by is not None and search_by != "" %}&search_by={{ search_by }} {% endif %}"
+                       class="btn btn-default bg-gray-l btn-sm btn-padding line-height">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                             class="bi bi-chevron-compact-left icon-size" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z"/>
+                        </svg>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+
+            {% csrf_token %}
+                <table class="table table-striped table-hover text-align mb-1">
+                    <tr class="bg-gray-l">
+                        <th>
+                            نام و نام خانوادگی
+                        </th>
+                        <th>
+                            شماره موبایل
+                        </th>
+                        <th>
+                            شماره کار
+                        </th>
+                        <th>
+                            شماره خانه
+                        </th>
+                    </tr>
+
+                    {% for contact in  object_list %}
+                    <tr>
+                        <td id="name{{ contact.id }}">
+                            <a href="#update" id="{{ contact.id }}">
+                                {{ contact.name }}
+                            </a>
+                        </td>
+                        <td id="phone{{ contact.id }}">
+                            {{ contact.phone }}
+                        </td>
+                        <td id="telWork{{ contact.id }}">
+                            {{ contact.tel_work}}
+                        </td>
+                        <td id="telHome{{ contact.id }}">
+                            {{ contact.tel_home }}
+                        </td>
+                        <td hidden id="comment{{ contact.id }}">
+                            {{ contact.comment }}
+                        </td>
+                        <td hidden>
+                            <input type="text" name="id"  value="{{ contact.id }}">
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+
+                </table>
+
+            </div>
+        </div>
+    </form>
+
+    </div>
+</section>
+{% endif %}

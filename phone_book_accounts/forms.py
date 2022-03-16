@@ -1,6 +1,8 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.core import validators
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class LoginForm(forms.Form):
@@ -36,12 +38,15 @@ class RegisterForm(forms.Form):
                              validators=[validators.EmailValidator('ایمیل معتبر نمیباشد')])
 
     def clean_user_name(self):
-        userName = self.cleaned_data['user_name']
-        dose_user_exist_by_user_name = User.objects.filter(username=userName).exists()
+        user_name = self.cleaned_data['user_name']
+        dose_user_exist_by_user_name = User.objects.filter(username=user_name).exists()
         if dose_user_exist_by_user_name:
             error = forms.ValidationError('این نام کاربری قبلا استفاده شده است')
             raise error
-        return userName
+        if ' ' in user_name:
+            error = forms.ValidationError('نباید در نام کاربری فاصله وجود داشته باشد')
+            raise error
+        return user_name
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -54,7 +59,31 @@ class RegisterForm(forms.Form):
     def clean_confirm_password(self):
         password = self.cleaned_data.get('password')
         co_password = self.cleaned_data['confirm_password']
-        print(co_password,password)
+        print(co_password, password)
         if password != co_password:
             raise forms.ValidationError('پسورد و تایید پسورد یکسان نیستند')
         return co_password
+
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'image', 'text']
+        # exclude = '__all__'
+
+    def save(self, id, commit=False):
+        user = User.objects.get(id=id)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.image = self.cleaned_data['image']
+        user.text = self.cleaned_data['text']
+        user.save()
+
+
+    def clean_user_name(self):
+        user_name = self.cleaned_data['user_name']
+        dose_user_exist_by_user_name = User.objects.filter(username=user_name).exists()
+        if dose_user_exist_by_user_name:
+            error = forms.ValidationError('این نام کاربری قبلا استفاده شده است')
+            raise error
+        return user_name

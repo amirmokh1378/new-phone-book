@@ -12,7 +12,8 @@ class ContactFilter(django_filters.FilterSet):
             'tel_work': ['icontains'],
             'phone': ['icontains'],
             'comment': ['icontains'],
-            'tel_home': ['icontains']
+            'tel_home': ['icontains'],
+            'is_public': ['icontains']
         }
 
     # def search_by_name_phone_email_family_filter(self, queryset, name, value):

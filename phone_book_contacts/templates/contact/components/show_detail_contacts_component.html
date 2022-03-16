@@ -1,0 +1,167 @@
+{% if user == request.user.username %}
+    <section id="update" style="display: none" class="mt-5 mb-5">
+        <form action="{% url 'phone_book_contacts:delete_contact' request.user %}" id="deleteDetailForm" method="post">
+
+            {% csrf_token %}
+            <div class="container  border">
+                <div class="row p-1">
+                    <div class="col-auto">
+
+
+
+                        <button type="submit" form="deleteDetailForm"
+                                class="btn btn-danger  btn-sm text btn-padding text line-height-1">
+                            حذف
+                        </button>
+                    </div>
+                    <div class="col-auto">
+
+                    </div>
+                </div>
+                <div class="row  bg-light p-3 text">
+                    <div class="row gy-1">
+                        <input type="text" hidden name="id" form="deleteDetailForm" id="idUpdate">
+                        <div class="col-3 col-sm-2 ">
+                            <span>نام و نام خانوادگی:</span>
+                        </div>
+                        <div class="col">
+                            <span class="value" id="nameUpdate">محمد خسروی</span>
+                            <input type="text" class="updateTextInput form-control input-sm text p-1 p-sm-auto"
+                                   style="display: none" value="محمد خسروی">
+                        </div>
+                        <div class="break col-12 border-bottom"></div>
+
+                        <div class="col-3 col-sm-2"><span>عمومی:</span></div>
+                        <div class="col-1">
+                            <span class="stateUpdate" id="stateUpdate">خیر</span>
+                            <input type="checkbox" class="updateCheckbox form-check-input" style="display: none">
+                        </div>
+                        <div class=" col-12 border-bottom"></div>
+                        <div class="col-3 col-sm-2">
+                            <span>شماره خانه:</span>
+                        </div>
+                        <div class="col">
+                            <span class="value" id="telHomeUpdate">031-33356045</span>
+                            <input type="text" class="updateTextInput form-control input-sm text p-1 p-sm-auto"
+                                   style="display: none" value="031-33356045">
+                        </div>
+                        <div class="break col-12 border-bottom"></div>
+                        <div class="col-3 col-sm-2">
+                            <span>شماره شرکت:</span>
+                        </div>
+                        <div class="col">
+                            <span class="value" id="telWorkUpdate">021-6849479974</span>
+                            <input type="text" class="updateTextInput form-control input-sm text p-1 p-sm-auto"
+                                   style="display: none" value="021-684947997">
+                        </div>
+
+                        <div class="col-12 border-bottom"></div>
+                        <div class="col-3 col-sm-2">
+                            <span>شماره موبایل:</span>
+                        </div>
+                        <div class="col">
+                            <span class="value" id="phoneUpdate">09103791346</span>
+                            <input type="text" class="updateTextInput form-control input-sm text p-1 p-sm-auto"
+                                   style="display: none" value="09103791346">
+                        </div>
+                        <div class="col-12 border-bottom"></div>
+                        <div class="col-3 col-sm-2"><span>توضیحات:</span></div>
+                        <div class="col">
+                            <p class="comment" id="commentUpdate">هسهایبهسیالریاسبذرایهذتیحبذایهاقلهاشسیبحهذر
+                                بیس لسبیلبیل
+                                یبابلا
+                                شایخلهریب ی شسای شسیهب سشیبشهسیالر شبل ش شبشاهیا شباسشیهباشسهایبهشابهسعیاب</p>
+                            <textarea name="" class="form-control input-sm text p-1 p-sm-auto comment"
+                                      style="display: none">
+                    هسهایبهسیالریاسبذرایهذتیحبذایهاقلهاشسیبحهذر
+                بیس لسبیلبیل
+                یبابلا
+                شایخلهریب ی شسای شسیهب سشیبشهسیالر شبل ش شبشاهیا شباسشیهباشسهایبهشابهسعیاب
+                </textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </section>
+{% else %}
+    <section id="update" style="display: none" class="mt-5 mb-5">
+        <div class="container  border">
+            <div class="row  bg-light p-3 text">
+                <div class="row gy-1   ">
+                    <input type="text" hidden name="id" form="deleteDetailForm" id="idUpdate">
+                    <div class="col-3 col-sm-2 ">
+                        <span>نام و نام خانوادگی:</span>
+                    </div>
+                    <div class="col">
+                        <span class="value" id="nameUpdate"></span>
+                        <input type="text" name="{{ create_contact_form.name.html_name }}"
+                               class="updateTextInput form-control input-sm text p-1 p-sm-auto" style="display: none">
+                        <ol>
+                            {% for error in create_contact_form.tel_work.errors %}
+                                <li class="text-danger">
+                                    {{ error }}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                    <div class="break col-12 border-bottom"></div>
+
+                    <div class="col-3 col-sm-2"><span>عمومی:</span></div>
+                    <div class="col-1">
+                        <span class="stateUpdate" id="stateUpdate">خیر</span>
+                        <input type="checkbox" class="updateCheckbox form-check-input" style="display: none">
+                    </div>
+                    <div class=" col-12 border-bottom"></div>
+                    <div class="col-3 col-sm-2">
+                        <span>شماره خانه:</span>
+                    </div>
+                    <div class="col">
+                        <span class="value" id="telHomeUpdate">031-33356045</span>
+                        <input type="text" class="updateTextInput form-control input-sm text p-1 p-sm-auto"
+                               style="display: none" value="031-33356045">
+                    </div>
+                    <div class="break col-12 border-bottom"></div>
+                    <div class="col-3 col-sm-2">
+                        <span>شماره شرکت:</span>
+                    </div>
+                    <div class="col">
+                        <span class="value" id="telWorkUpdate">021-6849479974</span>
+                        <input type="text" class="updateTextInput form-control input-sm text p-1 p-sm-auto"
+                               style="display: none" value="021-684947997">
+                    </div>
+
+                    <div class="col-12 border-bottom"></div>
+                    <div class="col-3 col-sm-2">
+                        <span>شماره موبایل:</span>
+                    </div>
+                    <div class="col">
+                        <span class="value" id="phoneUpdate">09103791346</span>
+                        <input type="text" class="updateTextInput form-control input-sm text p-1 p-sm-auto"
+                               style="display: none" value="09103791346">
+                    </div>
+                    <div class="col-12 border-bottom"></div>
+                    <div class="col-3 col-sm-2"><span>توضیحات:</span></div>
+                    <div class="col">
+                        <p class="comment" id="commentUpdate">هسهایبهسیالریاسبذرایهذتیحبذایهاقلهاشسیبحهذر
+                            بیس لسبیلبیل
+                            یبابلا
+                            شایخلهریب ی شسای شسیهب سشیبشهسیالر شبل ش شبشاهیا شباسشیهباشسهایبهشابهسعیاب</p>
+                        <textarea name="" class="form-control input-sm text p-1 p-sm-auto comment"
+                                  style="display: none">
+                    هسهایبهسیالریاسبذرایهذتیحبذایهاقلهاشسیبحهذر
+                بیس لسبیلبیل
+                یبابلا
+                شایخلهریب ی شسای شسیهب سشیبشهسیالر شبل ش شبشاهیا شباسشیهباشسهایبهشابهسعیاب
+                </textarea>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        </form>
+    </section>
+{% endif %}

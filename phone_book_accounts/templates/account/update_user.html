@@ -1,0 +1,84 @@
+{% extends '_shared/_MainLayout.html' %}
+{{% block content %}
+    <section>
+    <div class="container  border">
+        <form action="{% url 'phone_book_accounts:update_user' request.user.username %}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class="row p-1">
+            <div class="col-auto">
+                <button type="submit"
+                        class="btn btn-primary btn-sm text btn-padding text line-height-1">
+                    <i class="fa fa-save icon-size"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row  bg-light p-3 text">
+            <div class="row gy-1   ">
+                <div class="col-3 col-sm-2 ">
+                    <span >نام و نام خانوادگی:</span>
+                </div>
+                <div class="col">
+                    <input type="text" name="{{ update_user_form.first_name.html_name }}" value="{{ request.user.first_name }}" class="updateTextInput form-control input-sm text p-1 p-sm-auto">
+                    <ol>
+                        {% for error in update_user_form.first_name.errors %}
+                            <li class="text-danger">
+                                {{ error }}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                <div class="break col-12 border-bottom"></div>
+
+
+
+{#                <div class="col-3 col-sm-2">#}
+{#                    <span>نام خانوادگی:</span>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <input type="text" name="{{ update_user_form.last_name.html_name }}" value="{{ contact_object.tel_home }}" class="updateTextInput form-control input-sm text p-1 p-sm-auto"  >#}
+{##}
+{##}
+{#                    <ol>#}
+{#                        {% for error in update_user_form.last_name.errors %}#}
+{#                            <li class="text-danger">#}
+{#                                {{ error }}#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{##}
+{#                    </ol>#}
+{#                </div>#}
+
+                <div class="col-12 border-bottom"></div>
+                <div class="col-3 col-sm-2">
+                    <span>عکس:</span>
+                </div>
+                <div class="col">
+                    <input type="file" name="{{ update_user_form.image.html_name }}" value="{{ request.user.image }}" class="updateTextInput form-control input-sm text p-1 p-sm-auto"  >
+                    <ol>
+                        {% for error in update_user_form.image.errors %}
+                            <li class="text-danger">
+                                {{ error }}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                <div class="col-12 border-bottom"></div>
+                <div class="col-3 col-sm-2"><span>توضیحات:</span></div>
+                <div class="col">
+                    <textarea name="{{ update_user_form.text.html_name }}"  class="form-control input-sm text p-1 p-sm-auto comment" >{% if request.user.text is not None %}{{ request.user.text }}{% endif %}</textarea>
+                    <ol>
+                        {% for error in update_user_form.text.errors %}
+                            <li class="text-danger">
+                                {{ error }}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+</form>
+    </div>
+
+</section>
+{% endblock %}

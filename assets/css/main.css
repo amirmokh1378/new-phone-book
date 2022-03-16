@@ -1,0 +1,334 @@
+/*@media only screen and (max-width: 400px) {*/
+/*    size-1: */
+
+/*}*/
+
+@media only screen and (max-width: 250px) {
+    /*    !* For desktop: *!*/
+    /*    .col-1 {width: 8.33%;}*/
+    /*    .col-2 {width: 16.66%;}*/
+    /*    .col-3 {width: 25%;}*/
+    /*    .col-4 {width: 33.33%;}*/
+    /*    .col-5 {width: 41.66%;}*/
+    /*    .col-6 {width: 50%;}*/
+    /*    .col-7 {width: 58.33%;}*/
+    /*    .col-8 {width: 66.66%;}*/
+    /*    .col-9 {width: 75%;}*/
+    /*    .col-10 {width: 83.33%;}*/
+    /*    .col-11 {width: 91.66%;}*/
+    /*    .col-12 {width: 100%;}*/
+    .text {
+        font-size: 3vw;
+    }
+
+    .text-1 {
+        font-size: 4vw;
+    }
+
+    .table {
+        max-width: 100%;
+        font-size: 1.5vw;
+    }
+
+    .table > :not(caption) > * > * {
+        padding: 0px;
+        border-bottom-width: 0px;
+    }
+
+    .accordion-body {
+        padding: 0px;
+    }
+
+    .btn-padding {
+        padding: 0px 0px;
+    }
+
+    .icon-size {
+        width: 3vw;
+    }
+    .line-height {
+        line-height: 2vw;
+    }
+    .line-height-1 {
+        line-height: 2vw;
+    }
+    .btn-group-height {
+        height: 20px;
+    }
+    .border-big-dark {
+        border: 5px rgb(50, 50, 50, 0.8) inset;
+
+        /*border-top: none;*/
+    }
+
+
+}
+
+@media only screen and (min-width: 250px) {
+    /*    !* For desktop: *!*/
+    /*    .col-1 {width: 8.33%;}*/
+    /*    .col-2 {width: 16.66%;}*/
+    /*    .col-3 {width: 25%;}*/
+    /*    .col-4 {width: 33.33%;}*/
+    /*    .col-5 {width: 41.66%;}*/
+    /*    .col-6 {width: 50%;}*/
+    /*    .col-7 {width: 58.33%;}*/
+    /*    .col-8 {width: 66.66%;}*/
+    /*    .col-9 {width: 75%;}*/
+    /*    .col-10 {width: 83.33%;}*/
+    /*    .col-11 {width: 91.66%;}*/
+    /*    .col-12 {width: 100%;}*/
+    .text {
+        font-size: 6px;
+    }
+
+    .border-big-dark {
+        border: 7px rgb(50, 50, 50, 0.8) inset;
+
+        /*border-top: none;*/
+    }
+    .break{
+        display: block;
+    }
+    .icon-size {
+        width: 7px;
+    }
+
+    .btn-padding {
+        padding: 1px 3px;
+    }
+
+    .line-height {
+        line-height: 0.5;
+    }
+    .line-height-1 {
+        line-height: 1.5;
+    }
+
+    .text-1 {
+        font-size: 4vw;
+    }
+
+    .table {
+        max-width: 100%;
+        font-size: 6px;
+    }
+
+
+    .table > :not(caption) > * > * {
+        padding: 0px;
+        border-bottom-width: 0px;
+    }
+
+    .btn-group-height {
+        height: 25px;
+    }
+
+
+    /*.accordion-body{*/
+    /*    padding: 1.5px;*/
+    /*}*/
+
+}
+
+
+@media only screen and (min-width: 576px) {
+    /*    !* For desktop: *!*/
+    /*    .col-1 {width: 8.33%;}*/
+    /*    .col-2 {width: 16.66%;}*/
+    /*    .col-3 {width: 25%;}*/
+    /*    .col-4 {width: 33.33%;}*/
+    /*    .col-5 {width: 41.66%;}*/
+    /*    .col-6 {width: 50%;}*/
+    /*    .col-7 {width: 58.33%;}*/
+    /*    .col-8 {width: 66.66%;}*/
+    /*    .col-9 {width: 75%;}*/
+    /*    .col-10 {width: 83.33%;}*/
+    /*    .col-11 {width: 91.66%;}*/
+    /*    .col-12 {width: 100%;}*/
+    .table > :not(caption) > * > * {
+        padding: 1px;
+        border-bottom-width: 1px;
+    }
+    .border-big-dark {
+        border: 10px rgb(50, 50, 50, 0.8) inset;
+
+        /*border-top: none;*/
+    }
+    .text {
+        font-size: 8px;
+    }
+    .break{
+        display: none;
+    }
+
+    .table {
+        max-width: 100%;
+        font-size: 8px;
+    }
+
+    .btn-padding {
+        padding: 4px 8px;
+    }
+
+    .icon-size {
+        width: 10px;
+
+    }
+
+    .btn-group-height {
+        height: auto;
+    }
+    .line-height {
+        line-height: 1.5;
+    }
+
+
+}
+
+@media only screen and (min-width: 750px) {
+    /*    !* For desktop: *!*/
+    /*    .col-1 {width: 8.33%;}*/
+    /*    .col-2 {width: 16.66%;}*/
+    /*    .col-3 {width: 25%;}*/
+    /*    .col-4 {width: 33.33%;}*/
+    /*    .col-5 {width: 41.66%;}*/
+    /*    .col-6 {width: 50%;}*/
+    /*    .col-7 {width: 58.33%;}*/
+    /*    .col-8 {width: 66.66%;}*/
+    /*    .col-9 {width: 75%;}*/
+    /*    .col-10 {width: 83.33%;}*/
+    /*    .col-11 {width: 91.66%;}*/
+    /*    .col-12 {width: 100%;}*/
+    .text {
+        font-size: 12px;
+    }
+
+    .text-1 {
+        font-size: 21px;
+    }
+
+    .table {
+        max-width: 100%;
+        font-size: 10px;
+
+    }
+
+    .icon-size {
+        width: 16px;
+    }
+    .border-big-dark {
+        border: 12px rgb(50, 50, 50, 0.8) inset;
+
+        /*border-top: none;*/
+    }
+
+
+}
+
+
+@media only screen and (min-width: 1000px) {
+    /*    !* For desktop: *!*/
+    /*    .col-1 {width: 8.33%;}*/
+    /*    .col-2 {width: 16.66%;}*/
+    /*    .col-3 {width: 25%;}*/
+    /*    .col-4 {width: 33.33%;}*/
+    /*    .col-5 {width: 41.66%;}*/
+    /*    .col-6 {width: 50%;}*/
+    /*    .col-7 {width: 58.33%;}*/
+    /*    .col-8 {width: 66.66%;}*/
+    /*    .col-9 {width: 75%;}*/
+    /*    .col-10 {width: 83.33%;}*/
+    /*    .col-11 {width: 91.66%;}*/
+    /*    .col-12 {width: 100%;}*/
+    .text {
+        font-size: 16px;
+    }
+
+    .text-1 {
+        font-size: 32px;
+    }
+
+    .table {
+        max-width: 100%;
+        font-size: 1vw;
+
+    }
+
+    .trash {
+        width: 100%;
+    }
+
+
+}
+
+.container{
+    min-width: 270px;
+    overflow: auto;
+
+}
+
+body {
+    /*background-image: url('../img/g4.gif');*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+
+}
+
+.text_align {
+    text-align: center;
+}
+
+.bg-gray-l {
+    background: rgb(228, 228, 228, 0.75);
+}
+
+
+
+.bg-green-l {
+    background-color: rgba(1, 19, 1, 0.8);
+}
+
+/*@media only screen and (max-width: 600px) {*/
+
+
+/*}*/
+/*.text{*/
+/*    font-size: 3vw;*/
+/*}*/
+
+.shadow-danger {
+    color: white;
+    text-shadow: 1px 1px 0px black, 1px 5px 2px darkred, 1px 5px 4px darkred;
+}
+
+.shadow-success {
+    color: white;
+    text-shadow: 1px 1px 0px black, 1px 5px 2px black, 1px 5px 4px black;
+}
+
+.bg-blue {
+    background-color: rgba(7, 38, 162, 0.8);
+}
+
+.g-recaptcha {
+    transform: scale(0.50);
+    -webkit-transform: scale(0.50);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+}
+
+.bg-green {
+    background-color: darkgreen;
+}
+
+.text-color {
+    color: aqua;
+}
+
+
+
+.img{
+    max-width: 100%;
+}
