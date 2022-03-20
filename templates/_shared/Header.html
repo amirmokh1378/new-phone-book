@@ -1,22 +1,51 @@
 
 
+<header class="ds" id="bar" style="display: none;" >
+    <div  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="  position: absolute; z-index: 1; min-height: 100%; width: 280px;">
+        <a  id="closeBar" class="d-flex align-self-start mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            {% if request.user.is_authenticated %}
+                    <li class="nav-item "><a href="{% url 'phone_book_contacts:show_contact' request.user %}" class="nav-link text-white btn-padding" aria-current="page">خانه</a></li>
+                    <li class="nav-item "><a href="{% url 'phone_book_contacts:creat_new_contact' request.user %}" class="nav-link text-white  btn-padding">افزودن مخاطب</a></li>
+                    <li class="nav-item "><a href="{% url 'phone_book_contacts:add_contacts_by_file' request.user %}" class="nav-link  text-white btn-padding">افزودن مخاطبین با اکسل</a></li>
+                    <li class="nav-item "><a href="{% url 'phone_book_accounts:users' %}" class="nav-link text-white btn-padding">کاربران</a></li>
+                    <li class="nav-item "><a href="{% url 'phone_book_accounts:update_user' request.user %}" class="nav-link text-white  btn-padding">ویرایش پنل کاربری</a></li>
+                    <li class="nav-item "><a href="{% url 'phone_book_contacts:search_contact' request.user %}" class="nav-link text-white btn-padding">چست و جو پیشرفته</a></li>
+                    <li class="nav-item "><a href="{% url 'phone_book_accounts:logout' %}" class="nav-link text-white btn-padding">خروج</a></li>
+                {% endif %}
+        </ul>
+        <span>
+            دفترچه تلفن
+        </span>
+        <hr>
+    </div>
 
+</header>
 <header class="mb-4">
     <div class="container">
         <header class="d-flex justify-content-start py-3 text text-align  border-dark border-bottom">
             <ul class="nav nav-pills">
+
                 {% if request.user.is_authenticated != True %}
                     <li class="nav-item"><a href="{% url 'phone_book_accounts:login' %}" class="nav-link active btn-padding ">ورود</a></li>
                     <li class="nav-item"><a href="{% url 'phone_book_accounts:register' %}" class="nav-link  btn-padding ">ثبت نام</a></li>
                 {% endif %}
             {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'phone_book_contacts:show_contact' request.user %}" class="nav-link active btn-padding" aria-current="page">خانه</a></li>
-                    <li class="nav-item"><a href="{% url 'phone_book_contacts:creat_new_contact' request.user %}" class="nav-link  btn-padding">افزودن مخاطب</a></li>
-                    <li class="nav-item"><a href="{% url 'phone_book_contacts:add_contacts_by_file' request.user %}" class="nav-link  btn-padding">افزودن مخاطبین با اکسل</a></li>
-                    <li class="nav-item"><a href="{% url 'phone_book_accounts:users' %}" class="nav-link  btn-padding">کاربران</a></li>
-                    <li class="nav-item"><a href="{% url 'phone_book_accounts:update_user' request.user %}" class="nav-link  btn-padding">ویرایش پنل کاربری</a></li>
-                    <li class="nav-item"><a href="{% url 'phone_book_contacts:search_contact' request.user %}" class="nav-link  btn-padding">چست و جو پیشرفته</a></li>
-                    <li class="nav-item"><a href="{% url 'phone_book_accounts:logout' %}" class="nav-link  btn-padding">خروج</a></li>
+                    <li class="nav-item ds"><a id="openBar" class="nav-link btn-padding"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg></a></li>
+                    <li class="nav-item dn"><a href="{% url 'phone_book_contacts:show_contact' request.user %}" class="nav-link active btn-padding" aria-current="page">خانه</a></li>
+                    <li class="nav-item dn"><a href="{% url 'phone_book_contacts:creat_new_contact' request.user %}" class="nav-link  btn-padding">افزودن مخاطب</a></li>
+                    <li class="nav-item dn"><a href="{% url 'phone_book_contacts:add_contacts_by_file' request.user %}" class="nav-link  btn-padding">افزودن مخاطبین با اکسل</a></li>
+                    <li class="nav-item dn"><a href="{% url 'phone_book_accounts:users' %}" class="nav-link  btn-padding">کاربران</a></li>
+                    <li class="nav-item dn"><a href="{% url 'phone_book_accounts:update_user' request.user %}" class="nav-link  btn-padding">ویرایش پنل کاربری</a></li>
+                    <li class="nav-item dn"><a href="{% url 'phone_book_contacts:search_contact' request.user %}" class="nav-link  btn-padding">چست و جو پیشرفته</a></li>
+                    <li class="nav-item dn"><a href="{% url 'phone_book_accounts:logout' %}" class="nav-link  btn-padding">خروج</a></li>
                 {% endif %}
             </ul>
         </header>

@@ -1,13 +1,13 @@
 {% load static %}
 
 <div class="col-12 col-sm-6">
-                <a href="{% url 'phone_book_contacts:show_contact' user.username %}  " >
+                <a href="{% url 'phone_book_contacts:show_contact' user.username %}" >
                 <div class="row border-big-dark bg-warning align-items-center rounded-pill" >
                     <div class="col-2 p-0">
                         {% if user.image  %}
-                    <img src="{{ user.image.url }}" class="img rounded-circle"  alt="">
+                    <img src="{{ user.image.url }}"  width="70px" height="70px" class="img rounded-circle"  alt="">
                 {% else %}
-                    <img src="{% static 'images/user.jpg' %}"  class="img rounded-circle" alt="">
+                    <img src="{% static 'images/user.jpg' %}" width="70px" height="70px" class="img rounded-circle" alt="">
 
                 {% endif %}
 
@@ -24,10 +24,6 @@
                             <tr>
                                 <th>نام و نام خانوادگی:</th>
                                 <td>{{ user.first_name }} {{ user.last_name }}</td>
-                            </tr>
-                            <tr>
-                                <th>ایمیل:</th>
-                                <td>{{ user.email }}</td>
                             </tr>
                         </table>
                     </div>

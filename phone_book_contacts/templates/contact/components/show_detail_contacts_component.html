@@ -4,7 +4,7 @@
 
             {% csrf_token %}
             <div class="container  border">
-                <div class="row p-1">
+                <div class="row p-1 scroll-div">
                     <div class="col-auto">
 
 
@@ -18,7 +18,7 @@
 
                     </div>
                 </div>
-                <div class="row  bg-light p-3 text">
+                <div class="row  bg-light p-3 text scroll-div">
                     <div class="row gy-1">
                         <input type="text" hidden name="id" form="deleteDetailForm" id="idUpdate">
                         <div class="col-3 col-sm-2 ">
@@ -89,7 +89,7 @@
 {% else %}
     <section id="update" style="display: none" class="mt-5 mb-5">
         <div class="container  border">
-            <div class="row  bg-light p-3 text">
+            <div class="row  bg-light p-3 text scroll-div">
                 <div class="row gy-1   ">
                     <input type="text" hidden name="id" form="deleteDetailForm" id="idUpdate">
                     <div class="col-3 col-sm-2 ">

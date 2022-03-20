@@ -10,11 +10,11 @@
 {#            </div>#}
 {#        </div>#}
         <div class="row border-big-dark bg-warning  rounded-pill">
-            <div class="col-1 p-0 align-self-center">
+            <div class="col-2 p-0 align-self-center">
                 {% if user.image  %}
-                    <img src="{{ user.image.url }}" class="img rounded-circle" alt="">
+                    <img src="{{ user.image.url }}" width="70px" height="70" class="rounded-circle" alt="">
                 {% else %}
-                    <img src="{% static 'images/user.jpg' %}" class="img rounded-circle" alt="">
+                    <img src="{% static 'images/user.jpg' %}" width="70px" height="70"  class="img rounded-circle" alt="">
 
                 {% endif %}
 
@@ -26,25 +26,18 @@
                     <tr>
                         <th>نام کاربری:</th>
                         <td>{{ user.username }}</td>
-
-
                     </tr>
 
-                    <tr>
-                        <th>نام و نام خانوادگی:</th>
-                        <td>{{ user.first_name }} {{ request.user.last_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>ایمیل:</th>
-                        <td>{{ user.email }}</td>
-                    </tr>
+
                 </table>
             </div>
-            <div class="col text">
-                <div class="row align-items-start">
-
-                    <div class="col-2 ">توضیحات:</div>
-                    <div class="col">{% if user.text %}{{ user.text }} {% else %}دفترچه تلفن{% endif %}</div>
+            <div class="col text align-self-center">
+                    <table class="table table-striped table-hover text-align  mb-1">
+                        <tr>
+                            <th>نام و نام خانوادگی:</th>
+                            <td>{{ user.first_name }} {{ request.user.last_name }}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
